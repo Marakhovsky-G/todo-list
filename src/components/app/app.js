@@ -95,6 +95,10 @@ export default class App extends Component {
   filterPost(items, filter) {
     if (filter === 'done') {
       return items.filter(item => item.done)
+    } else if (filter === 'important') {
+      return items.filter(item => item.important)
+    } else if (filter === 'notDone') {
+      return items.filter(item => !item.done)
     } else {
       return items
     }

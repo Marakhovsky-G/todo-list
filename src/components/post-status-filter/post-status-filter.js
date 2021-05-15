@@ -8,6 +8,8 @@ export default class PostStatusFilter extends Component {
     this.buttons = [
       {name: 'all', label: 'Все'},
       {name: 'done', label: 'Выполненные'},
+      {name: 'notDone', label: 'Невыполненные'},
+      {name: 'important', label: 'Важные'}
     ]
   }
 
