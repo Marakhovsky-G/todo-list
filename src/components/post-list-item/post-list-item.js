@@ -5,20 +5,20 @@ import './post-list-item.scss';
 export default class PostListItem extends Component {
 
   render() {
-    const {label, onDelete, onToggleImportant, onToggleLiked, important, like} = this.props;
+    const {label, onDelete, onToggleImportant, onToggleDone, important, done} = this.props;
 
     let classNames = 'app-list-item d-flex justify-content-between';
     if (important) {
       classNames += ' important';
     }
 
-    if (like) {
-      classNames += ' like';
+    if (done) {
+      classNames += ' done';
     }
 
     return (
       <div className={classNames}>
-        <span className='app-list-item-label lead' onClick={onToggleLiked}>
+        <span className='app-list-item-label lead' onClick={onToggleDone}>
           {label}
         </span>
         <div className='d-flex justify-content-center align-items-center'>
@@ -34,7 +34,7 @@ export default class PostListItem extends Component {
             onClick={onDelete}>
               <i className='fa fa-trash' />
           </button>
-          <i className='fa fa-heart' />
+          <i className='far fa-check-square' />
         </div>
       </div>
     )

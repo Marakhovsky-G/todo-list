@@ -14,9 +14,9 @@ export default class App extends Component {
     super(props);
     this.state = {
       data: [
-        { label: 'Going to learn React', important: false, like: false, id: 1 },
-        { label: 'Thats so good', important: false, like: false, id: 2 },
-        { label: 'I need a break...', important: true, like: false, id: 3 }
+        { label: 'Going to learn React', important: false, done: false, id: 1 },
+        { label: 'Thats so good', important: false, done: false, id: 2 },
+        { label: 'I need a break...', important: true, done: false, id: 3 }
       ],
       term: '',
       filter: 'all'
@@ -68,12 +68,12 @@ export default class App extends Component {
     });
   }
 
-  onToggleLiked = (id) => {
+  onToggleDone = (id) => {
     this.setState(({ data }) => {
       const index = data.findIndex(elem => elem.id === id);
 
       const old = data[index];
-      const newItem = { ...old, like: !old.like };
+      const newItem = { ...old, done: !old.done };
 
       const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
       return {
@@ -93,8 +93,8 @@ export default class App extends Component {
   }
 
   filterPost(items, filter) {
-    if (filter === 'like') {
-      return items.filter(item => item.like)
+    if (filter === 'done') {
+      return items.filter(item => item.done)
     } else {
       return items
     }
@@ -110,7 +110,7 @@ export default class App extends Component {
 
   render() {
     const {data, term, filter} = this.state,
-      liked = data.filter(item => item.like).length,
+      done = data.filter(item => item.done).length,
       allPosts = data.length;
 
     const visiblePosts = this.filterPost(this.searchPost(data, term), filter);
@@ -118,7 +118,7 @@ export default class App extends Component {
     return (
       <div className='app'>
         <AppHeader
-          liked={liked}
+          done={done}
           allPosts={allPosts}
         />
         <div className='search-panel d-flex'>
@@ -134,7 +134,7 @@ export default class App extends Component {
           posts={visiblePosts}
           onDelete={this.deleteItem}
           onToggleImportant={this.onToggleImportant}
-          onToggleLiked={this.onToggleLiked}
+          onToggleDone={this.onToggleDone}
         />
         <PostAddForm
           onAdd={this.addItem} />
