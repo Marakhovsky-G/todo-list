@@ -35,6 +35,7 @@ export default class PostAddForm extends Component {
           className='form-control new-post-label'
           onChange={this.onValueChange}
           value={this.state.text}
+          required
         />
         <button
           type='submit'

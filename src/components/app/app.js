@@ -88,7 +88,7 @@ export default class App extends Component {
     }
 
     return items.filter((item) => {
-      return item.label.indexOf(term) > -1
+      return item.label.toLowerCase().indexOf(term) > -1
     });
   }
 
@@ -101,15 +101,15 @@ export default class App extends Component {
   }
 
   onUpdateSearch = (term) => {
-    this.setState({term})
+    this.setState({ term })
   }
 
   onFilterSelect = (filter) => {
-    this.setState({filter})
+    this.setState({ filter })
   }
 
   render() {
-    const {data, term, filter} = this.state,
+    const { data, term, filter } = this.state,
       done = data.filter(item => item.done).length,
       allPosts = data.length;
 
