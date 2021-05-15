@@ -23,6 +23,26 @@ export default class PostAddForm extends Component {
     })
   }
 
+  randomPlaceholder() {
+    const data = {
+      1: 'Ваше следующее дело?',
+      2: 'Ваш новый подвиг...',
+      3: 'Ваше новое приключение?',
+      4: 'Новая задача?',
+      5: 'Опять работать :('
+    }
+
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
+    }
+
+    return data[getRandomInt(1, 5)];
+  }
+
+
+
   render() {
     return (
       <form
@@ -31,7 +51,7 @@ export default class PostAddForm extends Component {
       >
         <input
           type='text'
-          placeholder='О чем вы думаете сейчас?'
+          placeholder={this.randomPlaceholder()}
           className='form-control new-post-label'
           onChange={this.onValueChange}
           value={this.state.text}
