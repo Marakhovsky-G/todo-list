@@ -24,6 +24,11 @@ export default class App extends Component {
     this.maxId = 4;
   }
 
+
+  lsToState() {
+
+  }
+
   deleteItem = (id) => {
     this.setState(({ data }) => {
       const index = data.findIndex(elem => elem.id === id),
@@ -40,10 +45,14 @@ export default class App extends Component {
   }
 
   addItem = (body) => {
+    const randomIt = function () {
+      return '_' + Math.random().toString(36).substr(2, 9);
+    };
+    const res = randomIt();
     const newItem = {
       label: body,
       important: false,
-      id: this.maxId++
+      id: res
     }
     this.setState(({ data }) => {
       const newArr = [...data, newItem];
