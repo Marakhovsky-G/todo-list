@@ -14,19 +14,43 @@ export default class App extends Component {
     super(props);
     this.state = {
       data: [
-        { label: 'Going to learn React', important: false, done: false, id: 1 },
-        { label: 'Thats so good', important: false, done: false, id: 2 },
-        { label: 'I need a break...', important: true, done: false, id: 3 }
+        // { label: 'Going to learn React', important: false, done: false, id: 1 },
+        // { label: 'Thats so good', important: false, done: false, id: 2 },
+        // { label: 'I need a break...', important: true, done: false, id: 3 }
       ],
       term: '',
       filter: 'all'
     };
-    this.maxId = 4;
   }
 
 
-  lsToState() {
+  stateToLS() {
+    for (let i = 0; i < this.state.data.length; i++) {
+      const obj = this.state.data[i]
+      localStorage.setItem(`post-${i}`, JSON.stringify(obj));
+    }
+  }
 
+  LSToState() {
+    const newArr = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      newArr.push(JSON.parse(localStorage.getItem(`post-${i}`)))
+    }
+    this.setState(({data}) => {
+      return {
+        data: newArr
+      }
+    })
+  }
+
+  componentDidMount() {
+    this.stateToLS();
+    this.LSToState()
+  }
+
+  componentDidUpdate() {
+    localStorage.clear();
+    this.stateToLS();
   }
 
   deleteItem = (id) => {
