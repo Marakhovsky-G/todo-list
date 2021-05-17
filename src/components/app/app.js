@@ -32,9 +32,12 @@ export default class App extends Component {
   }
 
   LSToState() {
-    const newArr = [];
+    let newArr = [];
     for (let i = 0; i < localStorage.length; i++) {
       newArr.push(JSON.parse(localStorage.getItem(`post-${i}`)))
+    }
+    if (newArr.length === 0) {
+      newArr = [{ label: 'Добавь новую задачу', important: true, done: false, id: 1 }];
     }
     this.setState(({data}) => {
       return {
